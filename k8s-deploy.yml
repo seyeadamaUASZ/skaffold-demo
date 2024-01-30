@@ -17,3 +17,18 @@ spec:
           image: adama93/skaffold-demo # Image that will be used to containers in the cluster
           ports:
             - containerPort: 8080 # The port that the contain
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health  # Adjust the path to your custom health endpoint
+              port: 8080
+            timeoutSeconds: 5  
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health  # Use the default health endpoint for liveness
+              port: 8080
+            timeoutSeconds: 5
+            initialDelaySeconds: 60
+            periodSeconds: 15  
