@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment # Kubernetes resource kind we are creating
+metadata:
+  name: skaffold-demo
+spec:
+  selector:
+    matchLabels:
+      app: skaffold-demo
+  replicas: 3 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: skaffold-demo
+    spec:
+      containers:
+        - name: skaffold-demo
+          image: adama93/skaffold-demo # Image that will be used to containers in the cluster
+          ports:
+            - containerPort: 8080 # The port that the contain
